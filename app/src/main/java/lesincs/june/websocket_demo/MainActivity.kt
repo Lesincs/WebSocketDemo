@@ -14,6 +14,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var webSocket: WebSocket
     // 用于切换线程
     val handler = Handler()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -37,11 +38,11 @@ class MainActivity : AppCompatActivity() {
 
         //发送普通消息
         if (webSocket.send("hello"))
-            handler.post { tvMessage.append("发送普通字符串 hello 成功\n") }
+            tvMessage.append("发送普通字符串 hello 成功\n")
 
         //发送二进制消息
         if (webSocket.send(ByteString.decodeHex("12")))
-            handler.post { tvMessage.append("发送二进制字符串 12 成功\n") }
+            tvMessage.append("发送二进制字符串 12 成功\n")
 
         webSocket.close(1000, "再见")
 
